@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.15"
+        android:layout_marginLeft="10dp"
+
+        >
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+
+            android:src="@drawable/veg_logo"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/cart_name"
+                android:layout_alignParentBottom="true"
+                android:layout_marginVertical="5dp"
+                android:textStyle="bold"
+
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:layout_height="match_parent"
+                android:text="Dish Name"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5">
+        <TextView
+            android:id="@+id/cart_price"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="₹0"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="#00d390"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5">
+        <TextView
+            android:id="@+id/cart_count"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Item Count"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="#00d390"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/cart_total"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="₹0"
+                android:gravity="center"
+                android:textColor="#2b2b2b"
+                android:textSize="25dp"
+                />
+    </LinearLayout>
+</LinearLayout>
