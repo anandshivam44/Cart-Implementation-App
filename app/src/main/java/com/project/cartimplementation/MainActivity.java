@@ -115,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements MyItemRecyclerVie
                     if (cartItemsOnRAM.get(i).getItemCount() == 1) {// check if its count is 1 then delete it because it will become 0
                         cartItemsOnRAM.remove(i);
                         deleteData(dishName,database);
+                        noOfItems--;
+                        tv_itemCount.setText(String.valueOf(noOfItems)+" Items");
                     } else if(cartItemsOnRAM.get(i).getItemCount()>1) { // if item count is greater than 1 then reduce it by 1
                         cartItemsOnRAM.get(i).setItemCount(cartItemsOnRAM.get(i).getItemCount() -1);//update
                         updatetData(dishName,price,cartItemsOnRAM.get(i).getItemCount(),database);

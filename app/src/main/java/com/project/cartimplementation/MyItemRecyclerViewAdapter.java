@@ -46,7 +46,14 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             holder.count.getLayoutParams();
             params.weight = 1.0f;
             holder.count.setLayoutParams(params);
+
             holder.count.setText(String.valueOf(dishDetails.get(position).getItemCount()));
+
+            LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) holder.removeDish.getLayoutParams();
+            params2.weight = 1.0f;
+            holder.removeDish.setLayoutParams(params2);
+
+            holder.addDish.setText("+");
         }
     }
 
@@ -81,13 +88,22 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                     cc=dishDetails.get(getAdapterPosition()).getItemCount();
 
                     if (cc==0){
-                        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)
+                        LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams)
                                 count.getLayoutParams();
-                        params.weight = 1.0f;
-                        count.setLayoutParams(params);
+                        params1.weight = 1.0f;
+                        count.setLayoutParams(params1);
+
+                        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) removeDish.getLayoutParams();
+                        params2.weight = 1.0f;
+                        removeDish.setLayoutParams(params2);
+
+                        addDish.setText("+");
+
+
                         ++cc;
                         dishDetails.get(getAdapterPosition()).setItemCount(cc);
                         count.setText(String.valueOf(cc));
+
                     }
                     else {
                         ++cc;
@@ -108,8 +124,14 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                     if (cc==1){
                         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)
                                 count.getLayoutParams();
-                        params.weight = 0.1f;
+                        params.weight = 0.0f;
                         count.setLayoutParams(params);
+
+                        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) removeDish.getLayoutParams();
+                        params2.weight = 0.0f;
+                        removeDish.setLayoutParams(params2);
+
+                        addDish.setText("ADD");
 
                         count.setText("");
                         itemClickedInterface.onItemClicked(dishDetails.get(getAdapterPosition()).getDishName(),dishDetails.get(getAdapterPosition()).getDishPrice(),false);
