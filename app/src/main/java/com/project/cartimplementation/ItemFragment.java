@@ -1,7 +1,6 @@
 package com.project.cartimplementation;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,22 +20,23 @@ import java.util.List;
 public class ItemFragment extends Fragment {
 
     List<CartItems> dishDetails;
-//    List<Integer> dishPrice;
     MyHelper helper;
     SQLiteDatabase database;
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
+    static String name;
 
     public ItemFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static ItemFragment newInstance(int columnCount) {
+    public static ItemFragment newInstance(int columnCount,String title) {
         ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
+        name=title;
         return fragment;
     }
 
@@ -50,16 +49,16 @@ public class ItemFragment extends Fragment {
         }
         dishDetails =new ArrayList<>();
 
-        dishDetails.add(new CartItems("Dish 1",1,0));
-        dishDetails.add(new CartItems("Dish 2",2,0));
-        dishDetails.add(new CartItems("Dish 3",3,0));
-        dishDetails.add(new CartItems("Dish 4",4,0));
-        dishDetails.add(new CartItems("Dish 5",5,0));
-        dishDetails.add(new CartItems("Dish 6",6,0));
-        dishDetails.add(new CartItems("Dish 7",7,0));
-        dishDetails.add(new CartItems("Dish 8",8,0));
-        dishDetails.add(new CartItems("Dish 9",9,0));
-        dishDetails.add(new CartItems("Dish 10",10,0));
+        dishDetails.add(new CartItems(name+" 1",1,0));
+        dishDetails.add(new CartItems(name+" 2",2,0));
+        dishDetails.add(new CartItems(name+" 3",3,0));
+        dishDetails.add(new CartItems(name+" 4",4,0));
+        dishDetails.add(new CartItems(name+" 5",5,0));
+        dishDetails.add(new CartItems(name+" 6",6,0));
+        dishDetails.add(new CartItems(name+" 7",7,0));
+        dishDetails.add(new CartItems(name+" 8",8,0));
+        dishDetails.add(new CartItems(name+" 9",9,0));
+        dishDetails.add(new CartItems(name+" 10",10,0));
 
         helper = new MyHelper(getContext());
         database = helper.getWritableDatabase();

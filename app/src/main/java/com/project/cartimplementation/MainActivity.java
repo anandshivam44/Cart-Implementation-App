@@ -14,9 +14,10 @@ import android.util.Log;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.project.cartimplementation.ui.main.SectionsPagerAdapter;
+import com.project.cartimplementation.ui.main.ViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,15 +32,16 @@ public class MainActivity extends AppCompatActivity implements MyItemRecyclerVie
     SQLiteDatabase database;
     List<CartItems> cartItemsOnRAM = new ArrayList<>();
     Button goToCart;
+    LinearLayout bottomCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
+        viewPager.setAdapter(viewPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         tv_price = findViewById(R.id.cartPrice);
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements MyItemRecyclerVie
                 Intent intent=new Intent(MainActivity.this, ShowCart.class);
 //                        intent.putExtra("count",sharedPref.getInt("count",0));
                 startActivity(intent);
+                finishActivity(0);
 
             }
         });
@@ -73,9 +76,12 @@ public class MainActivity extends AppCompatActivity implements MyItemRecyclerVie
             }
             tv_price.setText("₹"+String.valueOf(intprice));
             tv_itemCount=findViewById(R.id.item_count);
+            bottomCart=findViewById(R.id.bottom_cart);
             tv_itemCount.setText(String.valueOf(noOfItems)+" Items");
+            if (noOfItems==0){
+                bottomCart.setVisibility(View.GONE);
+            }
 
-//        }
 
 
 
@@ -103,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements MyItemRecyclerVie
                 noOfItems++;
                 cartItemsOnRAM.add(new CartItems(dishName,price,1));
                 insertData(dishName,price,1,database);
+                if (noOfItems>0){
+                    bottomCart.setVisibility(View.VISIBLE);
+                }
                 tv_itemCount.setText(String.valueOf(noOfItems)+" Items");
             }
         }
@@ -116,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements MyItemRecyclerVie
                         cartItemsOnRAM.remove(i);
                         deleteData(dishName,database);
                         noOfItems--;
+                        if (noOfItems==0){
+                            bottomCart.setVisibility(View.GONE);
+                        }
                         tv_itemCount.setText(String.valueOf(noOfItems)+" Items");
                     } else if(cartItemsOnRAM.get(i).getItemCount()>1) { // if item count is greater than 1 then reduce it by 1
                         cartItemsOnRAM.get(i).setItemCount(cartItemsOnRAM.get(i).getItemCount() -1);//update

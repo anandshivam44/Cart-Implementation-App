@@ -62,16 +62,16 @@
             android:background="@drawable/border"
             >
             <Button
-                android:id="@+id/add_item"
+                android:id="@+id/remove_item"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0"
                 android:layout_height="wrap_content"
-                android:text="Add"
-                android:layout_gravity="left"
-                android:textSize="25dp"
                 android:textColor="#00d390"
+                android:layout_gravity="right"
+                android:textSize="25dp"
                 android:background="#00ffffff"
-                />
+                android:text="-"/>
+
             <TextView
                 android:id="@+id/count"
                 android:layout_width="0dp"
@@ -83,15 +83,17 @@
                 android:layout_marginVertical="5dp"
                 />
             <Button
-                android:id="@+id/remove_item"
+                android:id="@+id/add_item"
                 android:layout_width="0dp"
-                android:layout_weight="0"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textColor="#00d390"
-                android:layout_gravity="right"
+                android:text="Add"
+                android:layout_gravity="left"
                 android:textSize="25dp"
+                android:textColor="#00d390"
                 android:background="#00ffffff"
-                android:text="-"/>
+                />
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -20,7 +20,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     List<CartItems> dishDetails;
     itemClickedInterface itemClickedInterface;
     int cc;
-//    int price;
 
 
     public MyItemRecyclerViewAdapter(List<CartItems> dishDetails, Context context) {

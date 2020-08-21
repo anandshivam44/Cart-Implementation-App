@@ -39,7 +39,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.5">
+        android:layout_weight="0.3">
         <TextView
             android:id="@+id/cart_price"
             android:layout_width="match_parent"
@@ -53,22 +53,59 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.5">
-        <TextView
-            android:id="@+id/cart_count"
+        android:layout_weight="0.8">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Item Count"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:textColor="#00d390"
-            />
+            android:layout_height="wrap_content"
+            android:paddingVertical="5dp"
+            android:layout_gravity="center"
+            android:text="View Cart"
+            android:paddingHorizontal="20dp"
+            android:textColor="#ffffff"
+            android:textAllCaps="false"
+            android:background="@drawable/border"
+            >
+            <Button
+                android:id="@+id/cart_minus"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="#00d390"
+                android:layout_gravity="right"
+                android:textSize="25dp"
+                android:background="#00ffffff"
+                android:text="-"/>
+
+            <TextView
+                android:id="@+id/cart_count"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="0"
+                android:gravity="center"
+                android:textColor="#00d390"
+                android:textSize="23dp"
+                android:layout_marginVertical="5dp"
+                />
+            <Button
+                android:id="@+id/cart_plus"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:layout_gravity="left"
+                android:textSize="25dp"
+                android:textColor="#00d390"
+                android:background="#00ffffff"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.5">
+        android:layout_weight="0.3">
 
             <TextView
                 android:id="@+id/cart_total"

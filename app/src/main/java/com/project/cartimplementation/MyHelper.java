@@ -1,6 +1,5 @@
 package com.project.cartimplementation;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -25,42 +24,9 @@ public class MyHelper extends SQLiteOpenHelper {
 
     }
 
-    public static void insertData(String name,int price,int count,SQLiteDatabase database){
-        ContentValues values=new ContentValues();
-        values.put("NAME",name);
-        values.put("PRICE",price);
-        values.put("COUNT",count);
-        database.insert("CART",null,values);
-    }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
 }
-
-
-//        insertData("Item A",36,sqLiteDatabase);
-//        insertData("Item B",66,sqLiteDatabase);
-//        insertData("Item C",636,sqLiteDatabase);
-
-//        insertData("Dish 1",26,sqLiteDatabase);
-//        insertData("Dish 2",300,sqLiteDatabase);
-//        insertData("Dish 3",100,sqLiteDatabase);
-//        insertData("Dish 4",120,sqLiteDatabase);
-//        insertData("Dish 5",50,sqLiteDatabase);
-//        insertData("Dish 6",250,sqLiteDatabase);
-//        insertData("Dish 7",200,sqLiteDatabase);
-//        insertData("Dish 8",350,sqLiteDatabase);
-//        insertData("Dish 9",10,sqLiteDatabase);
-//        insertData("Dish 10",60,sqLiteDatabase);
-//        insertData("Dish 11",99,sqLiteDatabase);
-//        insertData("Dish 12",199,sqLiteDatabase);
-//        insertData("Dish 13",299,sqLiteDatabase);
-//        insertData("Dish 14",399,sqLiteDatabase);
-//        insertData("Dish 15",499,sqLiteDatabase);
-//        insertData("Dish 16",500,sqLiteDatabase);
-//        insertData("Dish 17",555,sqLiteDatabase);
-//        insertData("Dish 18",55,sqLiteDatabase);
-//        insertData("Dish 19",111,sqLiteDatabase);
-//        insertData("Dish 20",222,sqLiteDatabase);
