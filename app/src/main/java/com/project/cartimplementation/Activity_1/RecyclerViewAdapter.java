@@ -1,8 +1,5 @@
 package com.project.cartimplementation.Activity_1;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,22 +8,24 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.project.cartimplementation.Activity_2.Activity2Adapter;
+import com.project.cartimplementation.Activity_2.ShowCartRecyclerviewAdapter;
 import com.project.cartimplementation.R;
 
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    List<Activity2Adapter.CartItems> dishDetails;
+    List<ShowCartRecyclerviewAdapter.CartItems> dishDetails;
     itemClickedInterface itemClickedInterface;
     int cc;
 
 
-    public RecyclerViewAdapter(List<Activity2Adapter.CartItems> dishDetails, Context context) {
-        this.dishDetails=dishDetails;
-        this.itemClickedInterface= (RecyclerViewAdapter.itemClickedInterface) context;
+    public RecyclerViewAdapter(List<ShowCartRecyclerviewAdapter.CartItems> dishDetails, Context context) {
+        this.dishDetails = dishDetails;
+        this.itemClickedInterface = (RecyclerViewAdapter.itemClickedInterface) context;
     }
 
     @Override
@@ -40,11 +39,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(final ViewHolder holder, int position) {
 //        holder.mItem = dishes.get(position);
         holder.dishName.setText(dishDetails.get(position).getDishName());
-        holder.dishPrice.setText(" ₹ " + String.valueOf(dishDetails.get(position).getDishPrice()));
-        cc=dishDetails.get(position).getItemCount();
-        if (cc>0){
+        holder.dishPrice.setText(" ₹ " + dishDetails.get(position).getDishPrice());
+        cc = dishDetails.get(position).getItemCount();
+        if (cc > 0) {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)
-            holder.count.getLayoutParams();
+                    holder.count.getLayoutParams();
             params.weight = 1.0f;
             holder.count.setLayoutParams(params);
 
@@ -61,6 +60,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public int getItemCount() {
         return dishDetails.size();
+    }
+
+    public interface itemClickedInterface {
+        void onItemClicked(String dishName, int price, boolean add);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -80,15 +83,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             dishPrice = (TextView) view.findViewById(R.id.dish_price);
             addDish = view.findViewById(R.id.add_item);
             removeDish = view.findViewById(R.id.remove_item);
-            count=view.findViewById(R.id.count);
+            count = view.findViewById(R.id.count);
 //            cc=dishDetails.get(getAdapterPosition()).getItemCount();
 
             addDish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    cc=dishDetails.get(getAdapterPosition()).getItemCount();
+                    cc = dishDetails.get(getAdapterPosition()).getItemCount();
 
-                    if (cc==0){
+                    if (cc == 0) {
                         LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams)
                                 count.getLayoutParams();
                         params1.weight = 1.0f;
@@ -105,24 +108,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         dishDetails.get(getAdapterPosition()).setItemCount(cc);
                         count.setText(String.valueOf(cc));
 
-                    }
-                    else {
+                    } else {
                         ++cc;
                         count.setText(String.valueOf(cc));
                         dishDetails.get(getAdapterPosition()).setItemCount(cc);
                     }
                     //sent old values no update till now
-                    itemClickedInterface.onItemClicked(dishDetails.get(getAdapterPosition()).getDishName(),dishDetails.get(getAdapterPosition()).getDishPrice(),true);
+                    itemClickedInterface.onItemClicked(dishDetails.get(getAdapterPosition()).getDishName(), dishDetails.get(getAdapterPosition()).getDishPrice(), true);
                 }
             });
 
             removeDish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    cc=dishDetails.get(getAdapterPosition()).getItemCount();
+                    cc = dishDetails.get(getAdapterPosition()).getItemCount();
 //                    --cc;
 
-                    if (cc==1){
+                    if (cc == 1) {
                         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)
                                 count.getLayoutParams();
                         params.weight = 0.0f;
@@ -135,16 +137,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         addDish.setText("ADD");
 
                         count.setText("");
-                        itemClickedInterface.onItemClicked(dishDetails.get(getAdapterPosition()).getDishName(),dishDetails.get(getAdapterPosition()).getDishPrice(),false);
+                        itemClickedInterface.onItemClicked(dishDetails.get(getAdapterPosition()).getDishName(), dishDetails.get(getAdapterPosition()).getDishPrice(), false);
                         --cc;
                         dishDetails.get(getAdapterPosition()).setItemCount(cc);
-                    }
-                    else if (cc>1) {
-                        cc=cc-1;
+                    } else if (cc > 1) {
+                        cc = cc - 1;
                         dishDetails.get(getAdapterPosition()).setItemCount(cc);
 
                         count.setText(String.valueOf(cc));
-                        itemClickedInterface.onItemClicked(dishDetails.get(getAdapterPosition()).getDishName(),dishDetails.get(getAdapterPosition()).getDishPrice(),false);
+                        itemClickedInterface.onItemClicked(dishDetails.get(getAdapterPosition()).getDishName(), dishDetails.get(getAdapterPosition()).getDishPrice(), false);
 
                     }
                 }
@@ -152,9 +153,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
 
 
-    }
-
-    public interface itemClickedInterface {
-        void onItemClicked(String dishName,int price, boolean add);
     }
 }

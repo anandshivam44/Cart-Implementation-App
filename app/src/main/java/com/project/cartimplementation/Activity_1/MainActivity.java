@@ -5,23 +5,20 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.util.Log;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.project.cartimplementation.Activity_2.Activity2Adapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+import com.project.cartimplementation.Activity_2.ShowCartRecyclerviewAdapter;
+import com.project.cartimplementation.Activity_2.ShowCart;
 import com.project.cartimplementation.MyHelper;
 import com.project.cartimplementation.R;
-import com.project.cartimplementation.Activity_2.ShowCart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +31,29 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     int noOfItems = 0;
     MyHelper helper;
     SQLiteDatabase database;
-    List<Activity2Adapter.CartItems> cartItemsOnRAM = new ArrayList<>();
+    List<ShowCartRecyclerviewAdapter.CartItems> cartItemsOnRAM = new ArrayList<>();
     Button goToCart;
     LinearLayout bottomCart;
     int bottomCartHeight;
+
+    public static void insertData(String name, int price, int count, SQLiteDatabase database) {
+        ContentValues values = new ContentValues();
+        values.put("NAME", name);
+        values.put("PRICE", price);
+        values.put("COUNT", count);
+        database.insert("CART", null, values);
+    }
+
+    public static void updatetData(String name, int price, int count, SQLiteDatabase database) {
+        ContentValues values = new ContentValues();
+        values.put("NAME", name);
+        values.put("COUNT", count);
+        database.update("CART", values, "NAME = ?", new String[]{name});
+    }
+
+    public static void deleteData(String name, SQLiteDatabase database) {
+        database.delete("CART", "NAME = ?", new String[]{name});
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,18 +88,18 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 String name = cursor.getString(0);
                 int price = cursor.getInt(1);
                 int count = cursor.getInt(2);
-                cartItemsOnRAM.add(new Activity2Adapter.CartItems(name, price, count));
+                cartItemsOnRAM.add(new ShowCartRecyclerviewAdapter.CartItems(name, price, count));
                 intprice += count * price;
-                noOfItems+=count;
+                noOfItems += count;
 
                 Log.d("MyTag", "Already on databse" + name + " " + price + " " + count);
             } while (cursor.moveToNext());
         }
-        tv_price.setText("$" + String.valueOf(intprice));
+        tv_price.setText("$" + intprice);
         tv_itemCount = findViewById(R.id.item_count);
         bottomCart = findViewById(R.id.bottom_cart);
-        tv_itemCount.setText(String.valueOf(noOfItems) + " Items");
-        if (noOfItems==0){
+        tv_itemCount.setText(noOfItems + " Items");
+        if (noOfItems == 0) {
             bottomCart.post(new Runnable() {
                 @Override
                 public void run() {
@@ -107,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
             }
             intprice += price;
-            tv_price.setText("$" + String.valueOf(intprice));
+            tv_price.setText("$" + intprice);
             boolean found = false;
 
             for (int i = 0; i < cartItemsOnRAM.size(); i++) {
@@ -118,19 +134,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                     updatetData(dishName, price, cartItemsOnRAM.get(i).getItemCount(), database);
                     found = true;
                     noOfItems++;
-                    tv_itemCount.setText(String.valueOf(noOfItems) + " Items");
+                    tv_itemCount.setText(noOfItems + " Items");
                 }
 
             }
             if (found == false) {//item not found in database so add it to database
                 noOfItems++;
-                cartItemsOnRAM.add(new Activity2Adapter.CartItems(dishName, price, 1));
+                cartItemsOnRAM.add(new ShowCartRecyclerviewAdapter.CartItems(dishName, price, 1));
                 insertData(dishName, price, 1, database);
-                tv_itemCount.setText(String.valueOf(noOfItems) + " Items");
+                tv_itemCount.setText(noOfItems + " Items");
             }
         } else {
             intprice -= price;
-            tv_price.setText("$" + String.valueOf(intprice));
+            tv_price.setText("$" + intprice);
 //            boolean found = false;
             for (int i = 0; i < cartItemsOnRAM.size(); i++) {
                 if (dishName.equals(cartItemsOnRAM.get(i).getDishName())) {// item found
@@ -138,12 +154,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                         cartItemsOnRAM.remove(i);
                         deleteData(dishName, database);
                         noOfItems--;
-                        tv_itemCount.setText(String.valueOf(noOfItems) + " Items");
+                        tv_itemCount.setText(noOfItems + " Items");
                     } else if (cartItemsOnRAM.get(i).getItemCount() > 1) { // if item count is greater than 1 then reduce it by 1
                         cartItemsOnRAM.get(i).setItemCount(cartItemsOnRAM.get(i).getItemCount() - 1);//update
                         updatetData(dishName, price, cartItemsOnRAM.get(i).getItemCount(), database);
                         noOfItems--;
-                        tv_itemCount.setText(String.valueOf(noOfItems) + " Items");
+                        tv_itemCount.setText(noOfItems + " Items");
 
                     }
 
@@ -171,25 +187,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 //            } while (cursor.moveToNext());
 //        }
 
-    }
-
-    public static void insertData(String name, int price, int count, SQLiteDatabase database) {
-        ContentValues values = new ContentValues();
-        values.put("NAME", name);
-        values.put("PRICE", price);
-        values.put("COUNT", count);
-        database.insert("CART", null, values);
-    }
-
-    public static void updatetData(String name, int price, int count, SQLiteDatabase database) {
-        ContentValues values = new ContentValues();
-        values.put("NAME", name);
-        values.put("COUNT", count);
-        database.update("CART", values, "NAME = ?", new String[]{name});
-    }
-
-    public static void deleteData(String name, SQLiteDatabase database) {
-        database.delete("CART", "NAME = ?", new String[]{name});
     }
 
 

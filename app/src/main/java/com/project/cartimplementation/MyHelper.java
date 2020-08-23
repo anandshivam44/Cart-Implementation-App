@@ -8,8 +8,8 @@ import androidx.annotation.Nullable;
 
 public class MyHelper extends SQLiteOpenHelper {
 
-    private static final String dbname="mydb";
-    private static final int version=1;
+    private static final String dbname = "mydb";
+    private static final int version = 1;
 
     public MyHelper(@Nullable Context context) {
         super(context, dbname, null, version);
@@ -18,7 +18,7 @@ public class MyHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String sql="CREATE TABLE CART (_id INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,PRICE INTEGER,COUNT INTEGER)";
+        String sql = "CREATE TABLE CART (_id INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,PRICE INTEGER,COUNT INTEGER)";
         sqLiteDatabase.execSQL(sql);
 
 
