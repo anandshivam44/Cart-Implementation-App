@@ -1,15 +1,11 @@
-package com.project.cartimplementation.ui.main;
+package com.project.cartimplementation.Activity_1;
 
 import android.content.Context;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-import com.project.cartimplementation.ItemFragment;
-import com.project.cartimplementation.R;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
@@ -27,7 +23,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-            return ItemFragment.newInstance(position,TAB_TITLES[position]);
+            return ViewPagerFragment.newInstance(position,TAB_TITLES[position]);
     }
 
     @Nullable

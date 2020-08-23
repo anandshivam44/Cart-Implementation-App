@@ -1,10 +1,9 @@
-package com.project.cartimplementation;
+package com.project.cartimplementation.Activity_1;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +12,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.project.cartimplementation.Activity_2.Activity2Adapter;
+import com.project.cartimplementation.R;
+
 import java.util.List;
 
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    List<CartItems> dishDetails;
+    List<Activity2Adapter.CartItems> dishDetails;
     itemClickedInterface itemClickedInterface;
     int cc;
 
 
-    public MyItemRecyclerViewAdapter(List<CartItems> dishDetails, Context context) {
+    public RecyclerViewAdapter(List<Activity2Adapter.CartItems> dishDetails, Context context) {
         this.dishDetails=dishDetails;
-        this.itemClickedInterface= (MyItemRecyclerViewAdapter.itemClickedInterface) context;
+        this.itemClickedInterface= (RecyclerViewAdapter.itemClickedInterface) context;
     }
 
     @Override

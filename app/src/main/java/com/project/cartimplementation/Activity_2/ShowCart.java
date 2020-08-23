@@ -1,19 +1,21 @@
-package com.project.cartimplementation;
+package com.project.cartimplementation.Activity_2;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.project.cartimplementation.Activity_1.MainActivity;
+import com.project.cartimplementation.MyHelper;
+import com.project.cartimplementation.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ public class ShowCart extends AppCompatActivity implements Activity2Adapter.Butt
     RecyclerView recyclerView;
     TextView gTot;
     Activity2Adapter adapter;
-    List<CartItems> cartItemsOnRAM = new ArrayList<>();
+    List<Activity2Adapter.CartItems> cartItemsOnRAM = new ArrayList<>();
     MyHelper helper;
     SQLiteDatabase database;
     Button Pay;
@@ -46,7 +48,7 @@ public class ShowCart extends AppCompatActivity implements Activity2Adapter.Butt
                     int price = cursor.getInt(1);
                     int count = cursor.getInt(2);
                     grandTotal+=price*count;
-                    cartItemsOnRAM.add(new CartItems(name, price, count));
+                    cartItemsOnRAM.add(new Activity2Adapter.CartItems(name, price, count));
 
                     Log.d("MyTag", "Activity 2"+name + " " + price + " " + count);
                 } while (cursor.moveToNext());

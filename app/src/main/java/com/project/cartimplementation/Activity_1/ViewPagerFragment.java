@@ -1,4 +1,4 @@
-package com.project.cartimplementation;
+package com.project.cartimplementation.Activity_1;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -13,13 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.project.cartimplementation.Activity_2.Activity2Adapter;
+import com.project.cartimplementation.MyHelper;
+import com.project.cartimplementation.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ItemFragment extends Fragment {
+public class ViewPagerFragment extends Fragment {
 
-    List<CartItems> dishDetails;
+    List<Activity2Adapter.CartItems> dishDetails;
     MyHelper helper;
     SQLiteDatabase database;
 
@@ -27,12 +31,12 @@ public class ItemFragment extends Fragment {
     private int mColumnCount = 1;
     static String name;
 
-    public ItemFragment() {
+    public ViewPagerFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static ItemFragment newInstance(int columnCount,String title) {
-        ItemFragment fragment = new ItemFragment();
+    public static ViewPagerFragment newInstance(int columnCount, String title) {
+        ViewPagerFragment fragment = new ViewPagerFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -49,16 +53,16 @@ public class ItemFragment extends Fragment {
         }
         dishDetails =new ArrayList<>();
 
-        dishDetails.add(new CartItems(name+" 1",1,0));
-        dishDetails.add(new CartItems(name+" 2",2,0));
-        dishDetails.add(new CartItems(name+" 3",3,0));
-        dishDetails.add(new CartItems(name+" 4",4,0));
-        dishDetails.add(new CartItems(name+" 5",5,0));
-        dishDetails.add(new CartItems(name+" 6",6,0));
-        dishDetails.add(new CartItems(name+" 7",7,0));
-        dishDetails.add(new CartItems(name+" 8",8,0));
-        dishDetails.add(new CartItems(name+" 9",9,0));
-        dishDetails.add(new CartItems(name+" 10",10,0));
+        dishDetails.add(new Activity2Adapter.CartItems(name+" 1",1,0));
+        dishDetails.add(new Activity2Adapter.CartItems(name+" 2",2,0));
+        dishDetails.add(new Activity2Adapter.CartItems(name+" 3",3,0));
+        dishDetails.add(new Activity2Adapter.CartItems(name+" 4",4,0));
+        dishDetails.add(new Activity2Adapter.CartItems(name+" 5",5,0));
+        dishDetails.add(new Activity2Adapter.CartItems(name+" 6",6,0));
+        dishDetails.add(new Activity2Adapter.CartItems(name+" 7",7,0));
+        dishDetails.add(new Activity2Adapter.CartItems(name+" 8",8,0));
+        dishDetails.add(new Activity2Adapter.CartItems(name+" 9",9,0));
+        dishDetails.add(new Activity2Adapter.CartItems(name+" 10",10,0));
 
         helper = new MyHelper(getContext());
         database = helper.getWritableDatabase();
@@ -89,7 +93,7 @@ public class ItemFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(dishDetails,getContext()));
+            recyclerView.setAdapter(new RecyclerViewAdapter(dishDetails,getContext()));
         }
         return view;
     }

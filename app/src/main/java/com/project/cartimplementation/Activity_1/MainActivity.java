@@ -1,4 +1,4 @@
-package com.project.cartimplementation;
+package com.project.cartimplementation.Activity_1;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -18,12 +18,15 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.project.cartimplementation.ui.main.ViewPagerAdapter;
+import com.project.cartimplementation.Activity_2.Activity2Adapter;
+import com.project.cartimplementation.MyHelper;
+import com.project.cartimplementation.R;
+import com.project.cartimplementation.Activity_2.ShowCart;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MyItemRecyclerViewAdapter.itemClickedInterface {
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.itemClickedInterface {
 
     TextView tv_price;
     TextView tv_itemCount;
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements MyItemRecyclerVie
     int noOfItems = 0;
     MyHelper helper;
     SQLiteDatabase database;
-    List<CartItems> cartItemsOnRAM = new ArrayList<>();
+    List<Activity2Adapter.CartItems> cartItemsOnRAM = new ArrayList<>();
     Button goToCart;
     LinearLayout bottomCart;
     int bottomCartHeight;
@@ -69,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements MyItemRecyclerVie
                 String name = cursor.getString(0);
                 int price = cursor.getInt(1);
                 int count = cursor.getInt(2);
-                cartItemsOnRAM.add(new CartItems(name, price, count));
+                cartItemsOnRAM.add(new Activity2Adapter.CartItems(name, price, count));
                 intprice += count * price;
                 noOfItems+=count;
 
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements MyItemRecyclerVie
             }
             if (found == false) {//item not found in database so add it to database
                 noOfItems++;
-                cartItemsOnRAM.add(new CartItems(dishName, price, 1));
+                cartItemsOnRAM.add(new Activity2Adapter.CartItems(dishName, price, 1));
                 insertData(dishName, price, 1, database);
                 tv_itemCount.setText(String.valueOf(noOfItems) + " Items");
             }
