@@ -62,7 +62,7 @@ public class ShowCart extends AppCompatActivity implements Activity2Adapter.Butt
         Pay=findViewById(R.id.pay);
 
 //        gTot=findViewById(R.id.grandTotal);
-        Pay.setText("Pay ₹"+String.valueOf(grandTotal));
+        Pay.setText("Pay $"+String.valueOf(grandTotal));
 
 
     }
@@ -82,12 +82,17 @@ public class ShowCart extends AppCompatActivity implements Activity2Adapter.Butt
         if (add){
             updatetData(dishName,price,count+1,database);
             grandTotal+=price;
-            Pay.setText("Pay ₹"+String.valueOf(grandTotal));
+            Pay.setText("Pay $"+String.valueOf(grandTotal));
         }
         else {
             grandTotal-=price;
-            Pay.setText("Pay ₹"+String.valueOf(grandTotal));
-            updatetData(dishName,price,count-1,database);
+            Pay.setText("Pay $"+String.valueOf(grandTotal));
+            if (count==1){
+                deleteData(dishName,database);
+            }
+            else {
+                updatetData(dishName, price, count - 1, database);
+            }
         }
 
 //        Cursor cursor = database.rawQuery("SELECT NAME, PRICE, COUNT FROM CART", new String[]{});
@@ -108,5 +113,8 @@ public class ShowCart extends AppCompatActivity implements Activity2Adapter.Butt
         values.put("NAME",name);
         values.put("COUNT",count);
         database.update("CART",values,"NAME = ?",new String[]{name});
+    }
+    public static void deleteData(String name,SQLiteDatabase database){
+        database.delete("CART","NAME = ?",new String[]{name});
     }
 }

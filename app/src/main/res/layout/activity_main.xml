@@ -97,7 +97,7 @@
                         android:id="@+id/cartPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₹0"
+                        android:text="$0"
                         android:textStyle="bold"
                         android:textColor="#00d390"
                         android:textSize="20dp"

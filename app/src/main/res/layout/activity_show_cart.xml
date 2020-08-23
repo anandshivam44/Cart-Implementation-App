@@ -10,13 +10,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/cartItemList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         app:layoutManager="LinearLayoutManager"
         tools:context=".ItemFragment"
         tools:listitem="@layout/cart_item"
-        android:layout_above="@+id/checkout"
+        android:layout_alignParentTop="true"
+        android:scrollbars="vertical"
+        android:scrollbarFadeDuration="10000"
         />
     <LinearLayout
         android:id="@+id/checkout"
