@@ -12,18 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.cartimplementation.Activity_2.ShowCartRecyclerviewAdapter;
+import com.project.cartimplementation.CartItems;
 import com.project.cartimplementation.R;
 
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    List<ShowCartRecyclerviewAdapter.CartItems> dishDetails;
+    List<CartItems> dishDetails;
     itemClickedInterface itemClickedInterface;
     int cc;
 
 
-    public RecyclerViewAdapter(List<ShowCartRecyclerviewAdapter.CartItems> dishDetails, Context context) {
+    public RecyclerViewAdapter(List<CartItems> dishDetails, Context context) {
         this.dishDetails = dishDetails;
         this.itemClickedInterface = (RecyclerViewAdapter.itemClickedInterface) context;
     }

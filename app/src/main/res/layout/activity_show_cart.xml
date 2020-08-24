@@ -5,63 +5,144 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity_2.ShowCart">
-    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/cartItemList"
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        app:layoutManager="LinearLayoutManager"
-        tools:context=".Activity_1.ViewPagerFragment"
-        tools:listitem="@layout/cart_item"
-        android:layout_alignParentTop="true"
-        android:scrollbars="vertical"
-        android:scrollbarFadeDuration="10000"
-        />
+        android:layout_above="@+id/address_box"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/cartItemList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:scrollbarFadeDuration="10000"
+                android:scrollbars="vertical"
+                app:layoutManager="LinearLayoutManager"
+                tools:context=".Activity_1.ViewPagerFragment"
+                tools:listitem="@layout/cart_item" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apply Coupon"
+                android:layout_marginVertical="10dp"
+                android:background="@color/cardview_light_background"
+                android:gravity="center"
+                android:drawableRight="@drawable/vector_apply_coupon"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="Payment Details\n.\n.\n.\n.\n."
+                />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/address_box"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@drawable/home_bacground"
+        android:layout_alignParentBottom="true"
+        >
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Red Fort, New Delhi, 600001"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/home_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.42000002" />
+
+        <ImageView
+            android:id="@+id/home_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/vector_home"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.17000002" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Home"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/address"
+            app:layout_constraintStart_toEndOf="@+id/home_icon" />
+
+        <TextView
+            android:id="@+id/changeadrress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Change Address"
+            android:textColor="#00d390"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.81"
+            app:layout_constraintStart_toEndOf="@+id/home_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <LinearLayout
         android:id="@+id/checkout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
 
         >
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1">-->
-<!--            <TextView-->
-<!--                android:id="@+id/grandTotal"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:text="Grand Total ₹0"-->
-<!--                android:gravity="center"-->
-<!--                android:textColor="#000000"-->
-<!--                android:textSize="20sp"-->
-<!--                />-->
-<!--        </LinearLayout>-->
 
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.65">
+
             <Button
                 android:id="@+id/pay"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Pay ₹0"
-                android:paddingHorizontal="20dp"
-                android:textColor="#ffffff"
-                android:textAllCaps="false"
                 android:layout_marginHorizontal="30dp"
                 android:background="@drawable/button_background"
-                />
+                android:gravity="center"
+                android:paddingHorizontal="20dp"
+                android:text="Pay ₹0"
+                android:textAllCaps="false"
+                android:textColor="#ffffff" />
         </LinearLayout>
 
     </LinearLayout>

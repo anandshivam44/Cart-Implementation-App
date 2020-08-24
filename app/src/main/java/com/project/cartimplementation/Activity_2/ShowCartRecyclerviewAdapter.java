@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.project.cartimplementation.CartItems;
 import com.project.cartimplementation.R;
 
 import java.util.List;
@@ -50,44 +51,7 @@ public class ShowCartRecyclerviewAdapter extends RecyclerView.Adapter<ShowCartRe
         void onItemClicked(String dishName, int price, int count, boolean add);
     }
 
-    public static class CartItems {
-        String dishName;
-        int dishPrice;
-        int itemCount;
 
-        public CartItems() {
-        }
-
-        public CartItems(String dishName, int dishPrice, int itemCount) {
-            this.dishName = dishName;
-            this.dishPrice = dishPrice;
-            this.itemCount = itemCount;
-        }
-
-        public String getDishName() {
-            return dishName;
-        }
-
-        public void setDishName(String dishName) {
-            this.dishName = dishName;
-        }
-
-        public int getDishPrice() {
-            return dishPrice;
-        }
-
-        public void setDishPrice(int dishPrice) {
-            this.dishPrice = dishPrice;
-        }
-
-        public int getItemCount() {
-            return itemCount;
-        }
-
-        public void setItemCount(int itemCount) {
-            this.itemCount = itemCount;
-        }
-    }
 
     public class InnerClass extends RecyclerView.ViewHolder {
 

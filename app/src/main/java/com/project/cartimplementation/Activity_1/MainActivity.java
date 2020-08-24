@@ -17,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.project.cartimplementation.Activity_2.ShowCartRecyclerviewAdapter;
 import com.project.cartimplementation.Activity_2.ShowCart;
+import com.project.cartimplementation.CartItems;
 import com.project.cartimplementation.MyHelper;
 import com.project.cartimplementation.R;
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     int noOfItems = 0;
     MyHelper helper;
     SQLiteDatabase database;
-    List<ShowCartRecyclerviewAdapter.CartItems> cartItemsOnRAM = new ArrayList<>();
+    List<CartItems> cartItemsOnRAM = new ArrayList<>();
     Button goToCart;
     LinearLayout bottomCart;
     int bottomCartHeight;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 String name = cursor.getString(0);
                 int price = cursor.getInt(1);
                 int count = cursor.getInt(2);
-                cartItemsOnRAM.add(new ShowCartRecyclerviewAdapter.CartItems(name, price, count));
+                cartItemsOnRAM.add(new CartItems(name, price, count));
                 intprice += count * price;
                 noOfItems += count;
 
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
             }
             if (found == false) {//item not found in database so add it to database
                 noOfItems++;
-                cartItemsOnRAM.add(new ShowCartRecyclerviewAdapter.CartItems(dishName, price, 1));
+                cartItemsOnRAM.add(new CartItems(dishName, price, 1));
                 insertData(dishName, price, 1, database);
                 tv_itemCount.setText(noOfItems + " Items");
             }
