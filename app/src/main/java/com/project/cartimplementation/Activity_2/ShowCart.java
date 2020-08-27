@@ -156,16 +156,7 @@ public class ShowCart extends AppCompatActivity implements ShowCartRecyclerviewA
             }
         }
 
-//        Cursor cursor = database.rawQuery("SELECT NAME, PRICE, COUNT FROM CART", new String[]{});
-//        if (cursor != null && cursor.moveToFirst()) {
-//
-//            do {
-//                String name = cursor.getString(0);
-//                int pp = cursor.getInt(1);
-//                int cc = cursor.getInt(2);
-//                Log.d("MyTag", "clicked "+name + " " + pp + " " + cc);
-//            } while (cursor.moveToNext());
-//        }
+
 
     }
 }
